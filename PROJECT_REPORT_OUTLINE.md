@@ -1,320 +1,409 @@
-# 📦 Inventory and Reorder Tracker
-### Console-Based Inventory Management Application
+# PROJECT REPORT OUTLINE
+## INVENTORY AND REORDER TRACKER – CONSOLE-BASED APPLICATION
 
-A menu-driven inventory management application developed using **Python 3.10+**. It enables users to manage products, monitor stock levels, record stock movements, generate reorder alerts, analyse inventory data, and produce reports through a simple console interface.
-
-The application uses CSV files for persistent storage and integrates NumPy, Pandas, and Matplotlib for statistical analysis, reporting, and data visualisation.
-
----
-
-## 🚀 Key Features
-
-- **Product Management:** Add, view, search, and update inventory products.
-- **Stock Management:** Record stock-in and stock-out transactions with automatic quantity updates.
-- **Reorder Alerts:** Identify products requiring restocking through NORMAL and URGENT alerts.
-- **Inventory Valuation:** Calculate individual product values and total inventory value.
-- **NumPy Statistical Analysis:** Generate inventory summaries, including mean, median, minimum, and maximum stock quantities.
-- **Pandas Reporting:** Generate category-wise and monthly inventory reports.
-- **Data Visualisation:** Create stock and estimated sales-value charts using Matplotlib.
-- **JSON Export:** Export inventory information into JSON format.
-- **Data Persistence:** Store inventory records and transaction history in CSV files.
-- **Input Validation:** Prevent invalid product details, quantities, prices, and stock operations.
-- **Automated Testing:** Includes 51 unit tests using Python's unittest framework.
+**Institution:** Institute of Engineering & Management (IEM), Kolkata  
+**Programme:** B.Tech  
+**Subject:** Python Programming Laboratory  
+**Department:** Electronics and Communication Engineering  
+**Section:** B  
+**Academic Session:** 2026–2027  
+**Project Title:** Inventory and Reorder Tracker
 
 ---
 
-## 🛠️ Technologies Used
+## REPORT FORMATTING REQUIREMENTS
 
-| Technology | Purpose |
+- Follow the format and presentation style of the sample project report provided by the department.
+- Use formal academic language and professional technical documentation.
+- Include properly numbered chapters, subheadings, tables, figures, diagrams and captions.
+- Use Times New Roman font with consistent heading styles.
+- Include the footer on every page:
+
+"Department of Electronics and Communication Engineering | Page N"
+
+- The cover page must contain the institution name, programme, subject, project title, team members' names, roll/enrollment numbers, Section B, department, academic session, submitted to and submission date.
+
+## 1. ABSTRACT
+
+Write an abstract of approximately 150–200 words covering:
+
+- The importance of inventory management.
+- The problem of manual stock tracking and delayed restocking.
+- The proposed Inventory and Reorder Tracker application.
+- Technologies used: Python, CSV, NumPy, Pandas, Matplotlib and JSON.
+- Automated testing using 51 unit tests.
+- Demonstration results: 12 products and 303 total units, with the total inventory value taken directly from the application output.
+- The limitation of the current system being designed for a single user.
+
+## 2. KEYWORDS
+
+Inventory management; Reorder alerts; Python; CSV; NumPy; Pandas; Matplotlib; JSON; Unit testing; Stock management.
+
+## 3. INTRODUCTION
+
+Explain:
+
+- The concept of inventory management.
+- The importance of stock monitoring for small businesses.
+- Problems associated with manual inventory tracking.
+- The need for automated stock-in and stock-out records.
+- The role of reorder alerts in preventing stock shortages.
+- Introduction to the developed console-based application.
+- Overview of the technologies and tools used.
+
+## 4. PROBLEM STATEMENT AND OBJECTIVES
+
+### 4.1 Problem Statement
+
+Describe the difficulties of maintaining product records, monitoring stock quantities, calculating inventory value, tracking transactions and identifying products that require restocking.
+
+### 4.2 Project Objectives
+
+List all 20 required project features as individual bullet-point objectives. Explain each feature briefly and accurately according to the actual implementation.
+
+## 5. SOFTWARE AND SYSTEM REQUIREMENTS
+
+### 5.1 Hardware Requirements
+
+Mention the basic computer system requirements.
+
+### 5.2 Software Requirements
+
+Include the following table:
+
+| Component | Specification |
 |---|---|
-| Python 3.10+ | Core application development |
-| NumPy | Statistical calculations |
-| Pandas | Inventory analysis and reporting |
-| Matplotlib | Charts and data visualisation |
-| CSV | Inventory and transaction storage |
-| JSON | Data export |
-| Dataclasses | Structured product and transaction records |
-| Unittest | Automated testing |
+| Programming Language | Python 3.10 or above |
+| Numerical Library | NumPy |
+| Data Analysis Library | Pandas |
+| Visualisation Library | Matplotlib |
+| Testing Framework | unittest |
+| Data Storage | CSV files |
+| Data Export | JSON |
+| Operating System | Windows / Linux / macOS |
+| Free Storage | Approximately 100 MB |
 
----
+## 6. SYSTEM DESIGN AND METHODOLOGY
 
-## 📁 Project Structure
+### 6.1 Overall System Architecture
 
-```text
-Inventory-and-Reorder-Tracker/
-│
-├── inventory_tracker.py
-│
-├── requirements.txt
-├── README.md
-├── .gitignore
-│
-├── tests/
-│   └── test_inventory_tracker.py
-│
-├── docs/
-│   ├── sample_output.txt
-│   └── PROJECT_REPORT_OUTLINE.md
-│
-└── data/
-    ├── products.csv
-    ├── transactions.csv
-    ├── charts/
-    └── exports/
-```
+Explain the layered architecture:
 
-**Note:** The `data/` directory and its files are created automatically when the application runs.
+1. Application Layer – App
+2. Reporting Layer – NumPy, Pandas and Matplotlib
+3. Storage Layer – Storage
+4. Inventory Management Layer – Inventory
+5. Data Record Layer – Product and Transaction
 
----
+### 6.2 Data Flow Diagram
 
-## ⚙️ Installation and Setup
+Include a clearly labelled data flow diagram showing the interaction between the user, application, inventory operations, storage system and reporting modules.
 
-### 1. Clone the Repository
+### 6.3 CSV Data Structure
 
-```bash
-git clone https://github.com/YOUR_USERNAME/Inventory-and-Reorder-Tracker.git
-```
-
-### 2. Navigate to the Project Directory
-
-```bash
-cd Inventory-and-Reorder-Tracker
-```
-
-### 3. Create a Virtual Environment
-
-```bash
-python -m venv .venv
-```
-
-Activate the virtual environment:
-
-**Windows:**
-```bash
-.venv\Scripts\activate
-```
-
-**macOS / Linux:**
-```bash
-source .venv/bin/activate
-```
-
-### 4. Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 5. Run the Application
-
-```bash
-python inventory_tracker.py
-```
-
-The application starts in the console, and inventory data is stored in the local `data/` directory.
-
-### Optional: Custom Data Directory
-
-```bash
-python inventory_tracker.py --data-dir D:\my_data
-```
-
----
-
-## 🧩 Application Architecture
-
-The application follows a modular, object-oriented design.
-
-| Component | Description |
-|---|---|
-| `Product` | Dataclass representing inventory products and validating product attributes. |
-| `Transaction` | Represents stock-in and stock-out records. |
-| `Inventory` | Handles product management, stock operations, searches, alerts, and inventory valuation. |
-| `Storage` | Manages CSV loading, saving, backup creation, and JSON exports. |
-| `Student` | Not applicable; the application uses inventory-specific data structures. |
-| `NumPy Summary` | Calculates statistical summaries of inventory data. |
-| `Pandas Reports` | Generates category-wise and monthly inventory reports. |
-| `Matplotlib Charts` | Produces stock and estimated sales-value visualisations. |
-| `App` | Handles the console menu, user inputs, and application workflow. |
-| `Validators` | Validate text, IDs, quantities, prices, and transaction values. |
-
----
-
-## 📊 Inventory Management Operations
-
-### 1. Product Management
-Users can add new products, view existing inventory, search for products, and update product information.
-
-### 2. Stock-In Operations
-Stock-in operations increase the available quantity and automatically record the corresponding transaction.
-
-### 3. Stock-Out Operations
-Stock-out operations decrease the available quantity. The application rejects requests that exceed the available stock.
-
-### 4. Reorder Alert System
-
-The application identifies products that require restocking.
-
-| Alert Level | Condition |
-|---|---|
-| NORMAL | Quantity is at or below the reorder level. |
-| URGENT | Quantity is zero or at or below 50% of the reorder level. |
-
-**Example:** If the reorder level is 10 units:
-
-- 11 units: No alert
-- 10 units: NORMAL
-- 6 units: NORMAL
-- 5 units: URGENT
-- 0 units: URGENT
-
-### 5. Inventory Valuation
-
-Calculates the total value of inventory using:
-
-**Product Value = Unit Price × Available Quantity**
-
-**Total Inventory Value = Sum of All Product Values**
-
-### 6. Data Analysis and Reporting
-
-NumPy and Pandas are used to generate statistical summaries, category-wise reports, monthly transaction reports, and daily stock-out value analysis.
-
-### 7. Data Visualisation
-
-Matplotlib generates charts illustrating inventory stock levels and estimated sales values.
-
-### 8. JSON Export
-
-The application supports exporting inventory information into JSON format for structured data storage and external use.
-
----
-
-## 💾 Data Storage and Persistence
-
-The application uses CSV files to maintain inventory records and transaction history.
+Explain the two CSV files.
 
 **products.csv**
 
-Stores:
-- Product ID
-- Product Name
-- Category
-- Unit Price
-- Available Quantity
-- Reorder Level
+Fields:
+- product_id
+- name
+- category
+- unit_price
+- quantity
+- reorder_level
 
 **transactions.csv**
 
-Stores:
-- Transaction ID
-- Timestamp
-- Product ID
-- Transaction Type
-- Quantity
-- Unit Price
-- Transaction Value
+Fields:
+- transaction_id
+- timestamp
+- product_id
+- type
+- quantity
+- unit_price
+- value
 
-Data is saved after inventory changes and when the application exits. The storage module also implements backup and recovery-related handling for corrupted CSV records.
+### 6.4 Stock-Out Flowchart
 
----
+Include a flowchart showing:
+1. Start.
+2. Enter product ID.
+3. Validate product ID.
+4. Enter stock-out quantity.
+5. Validate quantity.
+6. Check available stock.
+7. Reject if requested quantity exceeds available stock.
+8. Update inventory quantity.
+9. Record transaction.
+10. Save inventory data.
+11. Display updated stock.
+12. End.
 
-## 🧪 Testing and Validation
+### 6.5 Reorder Alert Mechanism
 
-The project includes an automated testing suite implemented using Python's `unittest` framework.
+Include the following table:
 
-### Run Automated Tests
+| Alert Level | Condition |
+|---|---|
+| NORMAL | Quantity is at or below the reorder level |
+| URGENT | Quantity is zero or at or below 50% of the reorder level |
 
-```bash
+Example: If the reorder level is 10 units:
+
+- 11 units – No alert
+- 10 units – NORMAL
+- 6 units – NORMAL
+- 5 units – URGENT
+- 0 units – URGENT
+
+### 6.6 Input Validation and Error Handling
+
+Explain validation of product IDs, product names, categories, quantities, prices and stock transactions. Discuss duplicate detection, invalid input handling, corrupted CSV records and error prevention.
+
+## 7. IMPLEMENTATION OF MAJOR MODULES
+
+Explain the implementation of each major module.
+
+Include a table with two columns:
+
+| Module / Function | Functionality |
+|---|---|
+| Product | Represents product records using a dataclass |
+| Transaction | Stores inventory transaction details |
+| Inventory | Manages product and stock operations |
+| add_product() | Adds new products |
+| update_product() | Updates product information |
+| stock_in() | Increases available stock |
+| stock_out() | Decreases available stock |
+| alert_level() | Determines reorder alert status |
+| total_value() | Calculates inventory valuation |
+| numpy_summary() | Calculates statistical summaries |
+| category_report() | Generates category-wise reports |
+| monthly_report() | Generates monthly transaction reports |
+| daily_stock_out_value() | Calculates daily stock-out values |
+| stock_chart() | Generates inventory stock charts |
+| sales_chart() | Generates estimated sales-value charts |
+| Storage.save() | Saves inventory and transaction records |
+| export_json() | Exports inventory data into JSON format |
+| App | Provides the console menu and user interaction |
+
+Include and explain relevant source-code snippets from the actual project for:
+
+- stock_out()
+- alert_level()
+- Storage.save()
+
+Explain the purpose and working of each snippet.
+
+## 8. RESULTS AND DISCUSSION
+
+Present the actual application outputs with screenshots and explanations.
+
+Include screenshots of:
+
+1. Main application menu.
+2. Product inventory table.
+3. Reorder alert display.
+4. Category-wise inventory report.
+5. Monthly transaction report.
+6. Stock chart.
+7. Estimated sales-value chart.
+8. JSON export output.
+
+### 8.1 Demonstration Results
+
+Include the following confirmed demonstration figures:
+
+- Total products: 12
+- Total inventory units: 303
+- Total inventory value: Obtain from actual application output.
+
+Discuss the observed functionality, inventory calculations, reorder notifications and generated reports.
+
+Do not fabricate screenshots, numerical values or execution results.
+
+## 9. TESTING AND VALIDATION
+
+### 9.1 Automated Testing
+
+Explain the use of Python's unittest framework.
+
+Include the command:
+
 python -m unittest discover -s tests -v
-```
 
-### Testing Coverage
+Report the test results:
 
-- Input validation and error handling.
-- Duplicate product detection.
-- Stock-in and stock-out operations.
-- Reorder alert boundary conditions.
-- Inventory valuation.
-- CSV saving and reloading.
-- Corrupted data handling.
-- JSON export.
-- Empty inventory reports.
-- Console menu operations.
+51 automated tests passed out of 51, as reported by the project test suite at packaging time.
 
-### Testing Results
+### 9.2 Test Case Table
 
-**51 unit tests** were reported as passing at packaging time.
+Include the following columns:
 
-Testing environment:
-- Python 3.12
-- NumPy 2.4
-- Pandas 3.0
-- Matplotlib 3.10
+| Test Case | Expected Result | Observed Result | Status |
+|---|---|---|---|
 
-Some aspects, including interactive chart windows, terminal formatting, and operating-system-specific behaviour, require manual verification.
+Cover product validation, duplicate detection, stock-in, stock-out, reorder thresholds, inventory valuation, CSV storage, corrupted data handling, JSON export and empty reports.
 
----
+### 9.3 Manual Testing
 
-## 📋 Sample Application Output
+Include a separate table documenting the manual testing of every console menu option.
 
-A sample console session is available in:
+Clearly distinguish automated test coverage from features that were verified only through manual testing.
 
-```text
+Mention that terminal colours, box characters, interactive chart windows, real file-permission situations and cross-platform behaviour require manual verification.
+
+## 10. LIMITATIONS AND FUTURE SCOPE
+
+### 10.1 Limitations
+
+- Designed for single-user operation.
+- No login or authentication system.
+- CSV files are used instead of a relational database.
+- Sales value is estimated from stock-out transactions.
+- Supplier management is not implemented.
+- Barcode-based product identification is not available.
+
+### 10.2 Future Scope
+
+- Integration with SQLite or MySQL.
+- Development of a graphical user interface.
+- Development of a web-based inventory dashboard.
+- Supplier and purchase-order management.
+- Barcode scanning and product identification.
+- Automated reorder quantity calculation.
+- Automated low-stock notifications.
+
+## 11. CONCLUSION
+
+Summarise the successful development of the Inventory and Reorder Tracker. Explain how Python programming, object-oriented design, CSV storage, NumPy, Pandas and Matplotlib have been applied to develop a functional inventory management application.
+
+Discuss the significance of automated stock monitoring, inventory valuation, transaction tracking, reorder alerts and testing.
+
+## 12. REFERENCES
+
+Include official documentation references:
+
+1. Python Documentation – https://docs.python.org/3/
+2. NumPy Documentation – https://numpy.org/doc/
+3. Pandas Documentation – https://pandas.pydata.org/docs/
+4. Matplotlib Documentation – https://matplotlib.org/stable/contents.html
+
+Follow the reference formatting used in the department's sample report.
+
+## 13. APPENDIX
+
+### Appendix A: CSV File Formats
+
+Include the structure and sample records of products.csv and transactions.csv.
+
+### Appendix B: Installation and Execution
+
+Include the installation and execution commands:
+
+pip install -r requirements.txt
+
+python inventory_tracker.py
+
+### Appendix C: Automated Testing
+
+Include:
+
+python -m unittest discover -s tests -v
+
+### Appendix D: Sample Application Session
+
+Include the actual sample session from:
+
 docs/sample_output.txt
-```
 
-It demonstrates the application's menu operations and expected console responses.
+### Appendix E: Source Code
 
----
-
-## 🎯 Project Objectives
-
-1. Develop a functional console-based inventory management system.
-2. Apply object-oriented programming principles in Python.
-3. Implement reliable stock-in and stock-out operations.
-4. Automate inventory monitoring and reorder notifications.
-5. Perform statistical analysis using NumPy.
-6. Generate structured inventory reports using Pandas.
-7. Visualise inventory information using Matplotlib.
-8. Implement persistent storage and data export functionality.
-9. Improve reliability through input validation and automated testing.
+Provide the complete source-code listing or refer to the source file inventory_tracker.py included in the project repository.
 
 ---
 
-## 🔮 Future Scope
+## FINAL REPORT EXPORT REQUIREMENTS
 
-- Develop a graphical user interface (GUI).
-- Integrate a relational database such as SQLite or MySQL.
-- Implement barcode-based product identification.
-- Add supplier and purchase-order management.
-- Introduce automated email notifications for low-stock products.
-- Develop a web-based inventory management dashboard.
+**Final PDF Filename:**
+
+Inventory_Reorder_Tracker_Report.pdf
+
+**Required submission location:**
+
+report/Inventory_Reorder_Tracker_Report.pdf
+
+Export the completed report from Microsoft Word or Google Docs in PDF format.
+
+## GITHUB SUBMISSION INSTRUCTIONS
+
+**Deadline: 20 November 2026**
+
+### 1. Create a GitHub Account
+
+Visit https://github.com/ and create a free account if you do not already have one.
+
+### 2. Create a New Repository
+
+Repository name:
+
+Inventory-and-Reorder-Tracker
+
+Visibility: Public
+
+Do not initialise another README because the project already contains one.
+
+### 3. Upload the Project
+
+Open the terminal inside the project folder and execute:
+
+git init
+
+git add .
+
+git commit -m "Inventory and Reorder Tracker - final submission"
+
+git branch -M main
+
+git remote add origin https://github.com/YOUR_USERNAME/Inventory-and-Reorder-Tracker.git
+
+git push -u origin main
+
+Replace YOUR_USERNAME with your actual GitHub username.
+
+### 4. Upload the Final Project Report
+
+Place the PDF inside the report folder:
+
+report/Inventory_Reorder_Tracker_Report.pdf
+
+Then execute:
+
+git add .
+
+git commit -m "Add project report"
+
+git push
+
+Alternatively, use GitHub's Add file → Upload files option to upload the additional files through the website.
+
+### 5. Verify Repository Access
+
+Open the repository link in a private/incognito browser window.
+
+Confirm that:
+- The repository is publicly accessible.
+- All source files are uploaded.
+- The project report PDF is available.
+- Supporting files and documentation are accessible.
+
+### 6. Google Sheet Submission
+
+Only ONE team member should submit the public GitHub repository link in the Google Sheet provided by the department.
+
+Avoid duplicate submissions from multiple members of the same group.
 
 ---
 
-## 👥 Project Team
-
-**Project Title:** Inventory and Reorder Tracker – Console-Based Application
-
-**Department:** Electronics and Communication Engineering
-
-**Institution:** Institute of Engineering & Management (IEM), Salt Lake, Kolkata
-
-**Academic Year:** 2026
-
-**Team Members:**
-
-Add the names and roll numbers of all group members here.
-
----
-
-## 📄 Project Documentation
-
-The complete project report is available in the repository in PDF format.
-
----
-
-## 📜 License
-
-This project is developed for academic and educational purposes as part of an engineering project submission.
+**FINAL DELIVERABLE:** A complete, professionally formatted academic project report in PDF format, accompanied by the full Python source code, test files, supporting data and documentation in a public GitHub repository.
