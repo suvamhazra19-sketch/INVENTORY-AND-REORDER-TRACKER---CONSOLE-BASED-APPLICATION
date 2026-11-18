@@ -5,7 +5,7 @@
 **Programme:** B.Tech  
 **Subject:** Python Programming Laboratory  
 **Department:** Electronics and Communication Engineering  
-**Section:** B  
+**Section:** A 
 **Academic Session:** 2026–2027  
 **Project Title:** Inventory and Reorder Tracker
 
